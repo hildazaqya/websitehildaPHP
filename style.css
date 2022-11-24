@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+
+#headeratas1 {
+    font-family: 'Lobster Two', 'cursive';
+}
+#headeratas2 {
+    background-color: #f9f2d8;
+    font-family: 'Quicksand', sans-serif;
+}
+#headeratas {
+    font-family: 'Quicksand', sans-serif;
+}
+
+#container1 {
+    background-image:url(./image/Helyouu.png);
+    background-size: cover;
+    opacity: 1.0;
+    height: 500px;
+    padding-top: 230px;
+    max-width: 1360px;
+}
+
+#container2 {
+    padding-top: 20px;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f9f2d8;
+    background-size: cover;
+    max-width: 1360px;
+}
+
+#arrivall {
+    font-family: 'Roboto Mono', monospace;
+}
+#container3 {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #df7198;
+    background-size: cover;
+    max-width: 1360px;
+}
+
+#container4 {
+    padding-top: 30px;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f9f2d8;
+    background-size: cover;
+    max-width: 1360px;
+}
+
+.rounded-circle {
+    width: 150px;
+    margin: auto;
+}
+#hanasui4 {
+    width: 200px;
+    margin: auto;
+}
+
+#lux4 {
+    width: 200px;
+    margin: auto;
+}
+
+#container5 {
+    padding-top: 50px;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f7cac9;
+    background-size: cover;
+    max-width: 1360px;
+}
+
+#footer1 {
+    font-family: 'Lobster Two', 'cursive';
+}
+
+#container7 {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #df7198;
+    background-size: cover;
+    max-width: 1360px;
+}
