@@ -83,45 +83,33 @@
           <?php echo $_POST["Pembayaran"];
 
 
-                      $servername = "localhost";
-                      $username = "root";
-                      $password = "";
-                      $dbname = "datapemesanan";
-                      $Nama = $_POST["Nama"];
-                      $Alamat = $_POST["Alamat"];
-                      $Nomor_telepon = $_POST["Nomor_telepon"];
-                      $Pesanan1 = $_POST["Pesanan1"];
-                      $Pesanan2 = $_POST["Pesanan2"];
-                      $Opsi_pengiriman = $_POST["Opsi_pengiriman"];
-                      $Pembayaran = $_POST["Pembayaran"];
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "datapemesanan";
+          $Nama = $_POST["Nama"];
+          $Alamat = $_POST["Alamat"];
+          $Nomor_telepon = $_POST["Nomor_telepon"];
+          $Pesanan1 = $_POST["Pesanan1"];
+          $Pesanan2 = $_POST["Pesanan2"];
+          $Opsi_pengiriman = $_POST["Opsi_pengiriman"];
+          $Pembayaran = $_POST["Pembayaran"];
 
-                      // Create Connection
-                      $conn = new mysqli($servername, $username, $password, $dbname);
-                      // Check Connection
-                      if ($conn->connect_error) {
-                        die("Connection Failed: " . $conn->connect_error);
-                      }
-                      $sql = "INSERT INTO dataorderan (Nama, Alamat, Nomor_telepon, Pesanan1, Pesanan2, Opsi_pengiriman, Pembayaran)
+          // Create Connection
+          $conn = new mysqli($servername, $username, $password, $dbname);
+          // Check Connection
+          if ($conn->connect_error) {
+            die("Connection Failed: " . $conn->connect_error);
+          }
+          $sql = "INSERT INTO dataorderan (Nama, Alamat, Nomor_telepon, Pesanan1, Pesanan2, Opsi_pengiriman, Pembayaran)
                       VALUE ('$Nama','$Alamat','$Nomor_telepon','$Pesanan1','$Pesanan2', '$Opsi_pengiriman', '$Pembayaran')";
 
-                      if ($conn->query($sql) === TRUE) {
-                        //   echo "New Records Created Successfully";
-                      } else {
-                        echo 'Error' . $sql . "<br>" . $conn->error;
-                      }
+          if ($conn->query($sql) === TRUE) {
+            //   echo "New Records Created Successfully";
+          } else {
+            echo 'Error' . $sql . "<br>" . $conn->error;
+          } ?>
 
-                      $conn = new mysqli($servername, $username, $password, $dbname);
-                      $sql = "SELECT Nama, Alamat, Nomor_telepon, Pesanan1, Pesanan2, Opsi_pengiriman, Pembayaran FROM dataorderan";
-                      $result = $conn->query($sql);
-                      if ($result->num_rows > 0) {
-                        // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                          // echo "data muncul";
-                        }
-                      }  else {
-                        echo "0 results";
-                      }
-                        ?>
         </p>
         <br>
       </div>
@@ -174,6 +162,19 @@
       </div>
     </section>
   </div>
+  <?php
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  $sql = "SELECT Nama, Alamat, Nomor_telepon, Pesanan1, Pesanan2, Opsi_pengiriman, Pembayaran FROM dataorderan";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+      // echo "data muncul";
+    }
+  } else {
+    echo "0 results";
+  }
+  ?>
 </body>
 
 </html>
