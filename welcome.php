@@ -117,26 +117,26 @@
         } catch(PDOException $e) {
           echo "Error: " . $e->getMessage();
         }
-        echo "<table style='border: solid 1px black;'>";
-        echo "<tr><th>Nama</th><th>Alamat</th><th>Nomor Telepon</th><th>Pesanan 1</th><th>Pesanan 2</th><th>Opsi Pengiriman</th><th>Pembayaran</th></tr>";
+//         echo "<table style='border: solid 1px black;'>";
+//         echo "<tr><th>Nama</th><th>Alamat</th><th>Nomor Telepon</th><th>Pesanan 1</th><th>Pesanan 2</th><th>Opsi Pengiriman</th><th>Pembayaran</th></tr>";
 
-        class TableRows extends RecursiveIteratorIterator {
-          function __construct($it) {
-            parent::__construct($it, self::LEAVES_ONLY);
-          }
+//         class TableRows extends RecursiveIteratorIterator {
+//           function __construct($it) {
+//             parent::__construct($it, self::LEAVES_ONLY);
+//           }
 
-          function current() {
-            return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
-          }
+//           function current() {
+//             return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+//           }
 
-          function beginChildren() {
-            echo "<tr>";
-          }
+//           function beginChildren() {
+//             echo "<tr>";
+//           }
 
-          function endChildren() {
-            echo "</tr>" . "\n";
-          }
-        }
+//           function endChildren() {
+//             echo "</tr>" . "\n";
+//           }
+//         }
 
         try {
           $conn = new PDO("pgsql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
