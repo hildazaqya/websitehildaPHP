@@ -83,10 +83,10 @@
           <?php echo $_POST["Pembayaran"];
 
 
-          $servername = "localhost";
-          $username = "root";
-          $password = "";
-          $dbname = "datapemesanan";
+          $servername = "ec2-44-205-177-160.compute-1.amazonaws.com";
+          $username = "wgwxizsrjjuehz";
+          $password = "5432";
+          $dbname = "d1sj7939vmpoi3";
           $Nama = $_POST["Nama"];
           $Alamat = $_POST["Alamat"];
           $Nomor_telepon = $_POST["Nomor_telepon"];
@@ -94,22 +94,66 @@
           $Pesanan2 = $_POST["Pesanan2"];
           $Opsi_pengiriman = $_POST["Opsi_pengiriman"];
           $Pembayaran = $_POST["Pembayaran"];
+          
+          try {
+          $conn = new PDO("pgsql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
+          // set the PDO error mode to exception
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-          // Create Connection
-          $conn = new mysqli($servername, $username, $password, $dbname);
-          // Check Connection
-          if ($conn->connect_error) {
-            die("Connection Failed: " . $conn->connect_error);
+          // prepare sql and bind parameters
+          $stmt = $conn->prepare("INSERT INTO dataorderan.penjualan (nama, alamat, nomor_telepon, pesanan1, pesanan2, opsi_pengiriman, pembayaran) 
+          VALUES (:nama, :alamat, :nomor_telepon, :pesanan1, :pesanan2, :opsi_pengiriman, :pembayaran)");
+          $stmt->bindParam(':nama', $Nama);
+          $stmt->bindParam(':alamat', $Alamat);
+          $stmt->bindParam(':nomor_telepon', $Nomor_telepon);
+          $stmt->bindParam(':pesanan1', $Pesanan1);
+          $stmt->bindParam(':pesanan2', $Pesanan2);
+          $stmt->bindParam(':opsi_pengiriman', $Opsi_pengiriman);  
+          $stmt->bindParam(':pembayaran', $Pembayaran);
+          $stmt->execute();
+            
+          echo "New records created successfully";
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        echo "<table style='border: solid 1px black;'>";
+        echo "<tr><th>Nama</th><th>Alamat</th><th>Nomor Telepon</th><th>Pesanan 1</th><th>Pesanan 2</th><th>Opsi Pengiriman</th><th>Pembayaran</th></tr>";
+
+        class TableRows extends RecursiveIteratorIterator {
+          function __construct($it) {
+            parent::__construct($it, self::LEAVES_ONLY);
           }
-          $sql = "INSERT INTO dataorderan (Nama, Alamat, Nomor_telepon, Pesanan1, Pesanan2, Opsi_pengiriman, Pembayaran)
-                      VALUE ('$Nama','$Alamat','$Nomor_telepon','$Pesanan1','$Pesanan2', '$Opsi_pengiriman', '$Pembayaran')";
 
-          if ($conn->query($sql) === TRUE) {
-            //   echo "New Records Created Successfully";
-          } else {
-            echo 'Error' . $sql . "<br>" . $conn->error;
-          } ?>
+          function current() {
+            return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+          }
 
+          function beginChildren() {
+            echo "<tr>";
+          }
+
+          function endChildren() {
+            echo "</tr>" . "\n";
+          }
+        }
+
+        try {
+          $conn = new PDO("pgsql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $stmt = $conn->prepare("SELECT nama, alamat, nomor_telepon, pesanan1, pesanan2, opsi_pengiriman, pembayaran FROM dataorderan.penjualan");
+          $stmt->execute();
+
+          // set the resulting array to associative
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+            echo $v;
+          }
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+
+        $conn = null;
+          ?>
         </p>
         <br>
       </div>
@@ -162,19 +206,6 @@
       </div>
     </section>
   </div>
-  <?php
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  $sql = "SELECT Nama, Alamat, Nomor_telepon, Pesanan1, Pesanan2, Opsi_pengiriman, Pembayaran FROM dataorderan";
-  $result = $conn->query($sql);
-  if ($result->num_rows > 0) {
-    // output data of each row
-    while ($row = $result->fetch_assoc()) {
-      // echo "data muncul";
-    }
-  } else {
-    echo "0 results";
-  }
-  ?>
 </body>
 
 </html>
