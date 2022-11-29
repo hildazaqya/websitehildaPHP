@@ -84,8 +84,9 @@
 
 
           $servername = "ec2-44-205-177-160.compute-1.amazonaws.com";
+          $port = "5432";
           $username = "wgwxizsrjjuehz";
-          $password = "5432";
+          $password = "55e033280022dbe536d2221d90c6f34b60d3906bae07642c735edf0026162a21";
           $dbname = "d1sj7939vmpoi3";
           $Nama = $_POST["Nama"];
           $Alamat = $_POST["Alamat"];
